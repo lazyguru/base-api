@@ -34,17 +34,15 @@ abstract class BaseService
 
     public function _handleError($data, $response)
     {
-        if (OutputInterface::VERBOSITY_DEBUG <= $this->output->getVerbosity()) {
-            $this->output->debug('Class: ' . get_class($this));
-            $this->output->debug('Request: ');
-            $this->output->debug('**********');
-            $this->output->debug(print_r($data, true));
-            $this->output->debug('**********');
-            $this->output->debug('Response: ');
-            $this->output->debug('**********');
-            $this->output->debug(print_r($response, true));
-            $this->output->debug('**********');
-        }
+        $this->output->debug('Class: ' . get_class($this));
+        $this->output->debug('Request: ');
+        $this->output->debug('**********');
+        $this->output->debug(print_r($data, true));
+        $this->output->debug('**********');
+        $this->output->debug('Response: ');
+        $this->output->debug('**********');
+        $this->output->debug(print_r($response, true));
+        $this->output->debug('**********');
     }
 
     protected function processRequest($data, $method = self::POST)
