@@ -14,16 +14,6 @@ abstract class BaseSoapService extends BaseService
     // Used for testing with a proxy (CharlesProxy) enabled
     private $_debug = false;
 
-    /**
-     * @param LoggerInterface $log
-     * @param $username
-     * @param $password
-     * @param array $options
-     */
-    public abstract function __construct(LoggerInterface $log, $username, $password, $options = []);
-    // $this->_options['proxy_host'] = '';
-    // $this->_options['proxy_port'] = '';
-
     protected function processRequest($method, $params)
     {
         if (empty($this->wsdl)) {
