@@ -34,11 +34,11 @@ abstract class BaseSoapService
     protected function processRequest($method, $params)
     {
         if (empty($this->wsdl)) {
-            throw Exception('Must specifiy WSDL in child class before calling parent::__construct.  Did you remember to override the __construct method?'
+            throw new \Exception('Must specifiy WSDL in child class before calling processRequest.  Did you remember to implement the __construct method?'
             );
         }
         if (empty($this->uri)) {
-            throw Exception('Must specifiy endpoint in child class before calling parent::__construct.  Did you remember to override the __construct method?'
+            throw new \Exception('Must specifiy uri in child class before calling processRequest.  Did you remember to implement the __construct method?'
             );
         }
 
