@@ -67,12 +67,13 @@ abstract class BaseSoapService
         }
 
         try {
+            $outputHeader = '';
             $resp = $this->_soapClient->__soapCall(
                 $method,
                 $params,
                 null,
                 $this->_headers,
-                ''
+                $outputHeader
             );
 
             return json_decode($resp);
