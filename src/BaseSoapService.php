@@ -78,10 +78,7 @@ abstract class BaseSoapService
 
             return json_decode($resp);
         } catch (\Exception $e) {
-            $this->output->error($e->getRequest());
-            if ($e->hasResponse()) {
-                $this->output->error($e->getResponse());
-            }
+            $this->output->error(print_r($e, true));
         }
     }
 } 
