@@ -47,7 +47,7 @@ abstract class BaseSoapService
         $this->_options['cache_wsdl'] = WSDL_CACHE_BOTH;
 
         $this->_headers = array(
-            new SoapHeader(
+            new \SoapHeader(
                 $this->uri,
                 'Login',
                 array(
@@ -58,12 +58,12 @@ abstract class BaseSoapService
         );
 
         if (substr($this->wsdl, 0, 4) != 'http') {
-            $this->_soapClient = new SoapClient(
+            $this->_soapClient = new \SoapClient(
                 dirname(__DIR__) . '/wsdl/' . $this->wsdl,
                 $this->_options
             );
         } else {
-            $this->_soapClient = new SoapClient($this->wsdl, $this->_options);
+            $this->_soapClient = new \SoapClient($this->wsdl, $this->_options);
         }
 
         try {
@@ -76,7 +76,7 @@ abstract class BaseSoapService
             );
 
             return json_decode($resp);
-        } catch (BadResponseException $e) {
+        } catch (\Exception $e) {
             $this->output->error($e->getRequest());
             if ($e->hasResponse()) {
                 $this->output->error($e->getResponse());
