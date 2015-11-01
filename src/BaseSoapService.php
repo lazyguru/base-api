@@ -31,6 +31,19 @@ abstract class BaseSoapService
      */
     public abstract function __construct(LoggerInterface $log, $username, $password, $options = []);
 
+    public function _handleError($data, $response)
+    {
+        $this->output->debug('Class: ' . get_class($this));
+        $this->output->debug('Request: ');
+        $this->output->debug('**********');
+        $this->output->debug(print_r($data, true));
+        $this->output->debug('**********');
+        $this->output->debug('Response: ');
+        $this->output->debug('**********');
+        $this->output->debug(print_r($response, true));
+        $this->output->debug('**********');
+    }
+
     protected function processRequest($method, $params)
     {
         if (empty($this->wsdl)) {
@@ -76,7 +89,7 @@ abstract class BaseSoapService
                 $outputHeader
             );
 
-            return json_decode($resp);
+            return $resp;
         } catch (\Exception $e) {
             $this->output->error(print_r($e, true));
         }
