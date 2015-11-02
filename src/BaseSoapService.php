@@ -7,11 +7,11 @@ use Psr\Log\LoggerInterface;
 abstract class BaseSoapService
 {
     protected $wsdl        = null;
-    private   $_soapClient = null;
-    private   $_options    = [];
+    protected $_soapClient = null;
+    protected $_options    = [];
 
     // Used for testing with a proxy (CharlesProxy) enabled
-    private $_debug = false;
+    protected $_debug = false;
 
     protected $_headers = [];
     protected $uri = '';
@@ -55,21 +55,6 @@ abstract class BaseSoapService
             );
         }
 
-        $this->_options['trace'] = 1;
-        $this->_options['exceptions'] = true;
-        $this->_options['cache_wsdl'] = WSDL_CACHE_BOTH;
-
-        $this->_headers = array(
-            new \SoapHeader(
-                $this->uri,
-                'Login',
-                array(
-                    'Username' => $this->username,
-                    'Password' => $this->password
-                )
-            )
-        );
-
         if (substr($this->wsdl, 0, 4) != 'http') {
             $this->_soapClient = new \SoapClient(
                 dirname(__DIR__) . '/wsdl/' . $this->wsdl,
@@ -95,3 +80,4 @@ abstract class BaseSoapService
         }
     }
 } 
+
