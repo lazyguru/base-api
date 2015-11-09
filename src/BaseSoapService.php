@@ -31,6 +31,12 @@ abstract class BaseSoapService
      */
     public abstract function __construct(LoggerInterface $log, $username, $password, $options = []);
 
+    /**
+     * Debug logging of input/output from API calls
+     *
+     * @param array $data     API input
+     * @param mixed $response Response from API
+     */
     public function _handleError($data, $response)
     {
         $this->output->debug('Class: ' . get_class($this));
@@ -44,6 +50,14 @@ abstract class BaseSoapService
         $this->output->debug('**********');
     }
 
+    /**
+     * Make API call
+     *
+     * @param string $method SOAP method to call
+     * @param array  $params Input for API call
+     *
+     * @return array Response body from API call
+     */
     protected function processRequest($method, $params)
     {
         if (empty($this->wsdl)) {
@@ -79,5 +93,4 @@ abstract class BaseSoapService
             $this->output->error(print_r($e, true));
         }
     }
-} 
-
+}

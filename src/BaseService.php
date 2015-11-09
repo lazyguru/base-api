@@ -25,6 +25,8 @@ abstract class BaseService
     protected $output;
 
     /**
+     * Constructor
+     *
      * @param LoggerInterface $log
      * @param $username
      * @param $password
@@ -32,6 +34,12 @@ abstract class BaseService
      */
     public abstract function __construct(LoggerInterface $log, $username, $password, $options = []);
 
+    /**
+     * Debug logging of input/output from API calls
+     *
+     * @param array $data     API input
+     * @param mixed $response Response from API
+     */
     public function _handleError($data, $response)
     {
         $this->output->debug('Class: ' . get_class($this));
@@ -45,6 +53,14 @@ abstract class BaseService
         $this->output->debug('**********');
     }
 
+    /**
+     * Make API call
+     *
+     * @param array  $data   Input for API call
+     * @param string $method HTTP request type
+     *
+     * @return array Response body from API call
+     */
     protected function processRequest($data, $method = self::POST)
     {
         $this->_headers['Content-Type'] = 'application/json';
@@ -72,4 +88,4 @@ abstract class BaseService
             }
         }
     }
-} 
+}
